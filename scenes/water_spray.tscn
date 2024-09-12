@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy0hpcqnlboxd"]
+
+[ext_resource type="Texture2D" uid="uid://bij27rvgmyybc" path="res://assets/kenney_particle-pack/PNG (Transparent)/dirt_03.png" id="1_xugtp"]
+
+[sub_resource type="Curve" id="Curve_itmc0"]
+_data = [Vector2(0, 0.362637), 0.0, 0.0, 0, 0, Vector2(0.833333, 1), 0.0541598, 0.0541598, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7yypu"]
+curve = SubResource("Curve_itmc0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mkdad"]
+velocity_pivot = Vector3(0, 0, -1)
+direction = Vector3(0, 0, -1)
+spread = 5.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+scale_curve = SubResource("CurveTexture_7yypu")
+color = Color(0.286275, 1, 1, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1q3a"]
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_xugtp")
+albedo_texture_msdf = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_uc2id"]
+material = SubResource("StandardMaterial3D_d1q3a")
+
+[node name="WaterSpray" type="GPUParticles3D"]
+emitting = false
+amount = 120
+collision_base_size = 0.5
+process_material = SubResource("ParticleProcessMaterial_mkdad")
+draw_pass_1 = SubResource("QuadMesh_uc2id")

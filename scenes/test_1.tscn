@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://drlp2vpjldtyo"]
+
+[ext_resource type="PackedScene" uid="uid://cuam8eaknil73" path="res://scenes/player.tscn" id="1_4hlwe"]
+[ext_resource type="Material" uid="uid://d3haanma0cvl8" path="res://assets/StyleGround/StyleGroundMaterial.tres" id="1_oxgfr"]
+[ext_resource type="Script" path="res://scripts/smoother.gd" id="3_2j8ty"]
+[ext_resource type="Material" uid="uid://udixsb33ks3k" path="res://assets/FlatCutStone/FlatCutStone.tres" id="4_5ql0k"]
+
+[sub_resource type="GDScript" id="GDScript_2lj8d"]
+script/source = "extends Node3D
+
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"ui_fullscreen\"):
+		if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lbxd2"]
+
+[sub_resource type="Sky" id="Sky_ndtj2"]
+sky_material = SubResource("ProceduralSkyMaterial_lbxd2")
+
+[sub_resource type="Environment" id="Environment_s3nwx"]
+background_mode = 2
+sky = SubResource("Sky_ndtj2")
+ambient_light_source = 3
+ambient_light_color = Color(0.329412, 0.286275, 0.627451, 1)
+tonemap_mode = 1
+adjustment_enabled = true
+adjustment_brightness = 0.83
+adjustment_contrast = 0.92
+adjustment_saturation = 1.17
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oej23"]
+
+[node name="Test1" type="Node3D"]
+script = SubResource("GDScript_2lj8d")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(100, 1, 100)
+material = ExtResource("1_oxgfr")
+
+[node name="Player" parent="." instance=ExtResource("1_4hlwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.21197, 2.89109, 2.38665)
+MAX_GROUND_SPEED = 15.0
+JUMP_TIME = 0.3
+JUMP_HEIGHT = 1.5
+FRICTION = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s3nwx")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0825653, 0.987267, -48.5431)
+material_override = ExtResource("4_5ql0k")
+use_collision = true
+size = Vector3(100, 5, 1)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0825653, -0.987267, 48.5431)
+size = Vector3(100, 1, 100)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.0165799, 0, 0.999863, 0, 1, 0, -0.999863, 0, 0.0165799, 48.3331, 0.987267, 0.33682)
+material_override = ExtResource("4_5ql0k")
+use_collision = true
+size = Vector3(96.0807, 5, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.999996, 0, -0.00294962, 0, 1, 0, 0.00294962, 0, -0.999996, -0.910999, 0.987267, 47.7264)
+material_override = ExtResource("4_5ql0k")
+use_collision = true
+size = Vector3(99.4994, 5, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.0136306, 0, -0.999907, 0, 1, 0, 0.999907, 0, -0.0136306, -49.3055, 0.987267, -1.0109)
+material_override = ExtResource("4_5ql0k")
+use_collision = true
+size = Vector3(96.0807, 5, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.337506, -0.638355, 0.691803, 0, 0.734926, 0.678147, -0.941323, -0.228879, 0.248042, 0, 6.81056, 0)
+shadow_enabled = true
+
+[node name="Smoother" type="Node" parent="."]
+script = ExtResource("3_2j8ty")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51959, 1.8293, 2.03473)
+material_override = ExtResource("4_5ql0k")
+use_collision = true
+size = Vector3(8, 1, 5)
+material = SubResource("StandardMaterial3D_oej23")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CSGBox3D6"]
+size = Vector3(8, 1, 5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51959, 0.756741, 6.94652)
+use_collision = true
+size = Vector3(8, 1, 5)
+material = ExtResource("4_5ql0k")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CSGBox3D7"]
+size = Vector3(8, 1, 5)
