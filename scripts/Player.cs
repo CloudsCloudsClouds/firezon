@@ -9,7 +9,13 @@ public partial class Player : CharacterBody3D
 	[Export]
 	public Node3D Head;
 	[Export]
+	public bool HeadTilt = true;
+	[Export]
+	public bool weaponTilt = true;
+	[Export]
 	public Camera3D Camera;
+	[Export]
+	public Node3D Weapon;
 	[Export]
 	public float CameraSensitivity = 0.05f;
 
@@ -47,6 +53,7 @@ public partial class Player : CharacterBody3D
 	private float MAX_ACCELERATION = 10;
 	private float JumpForce;
 	private float Gravity;
+	private Vector2 CameraVelocity = Vector2.Zero;
 
 	// 	---
 	//	FUNCTIONS
@@ -88,21 +95,42 @@ public partial class Player : CharacterBody3D
 		ProcessMovement(delta);
 	}
 
+    public override void _Process(double delta)
+    {
+        if (HeadTilt)
+		{
+			float x_input = Input.GetAxis("ui_leftside", "ui_rightside");
+			Head.Call("cam_tilt", x_input, delta);
+		}
 
-	//	---
-	//		PRIVATE FUNCTIONS
-	// 	---
+		if (weaponTilt)
+		{
+			Weapon.Call("weapon_tilt", CameraVelocity.X, CameraVelocity.Y, delta);
+		}
+    }
 
-	/// <summary>
-	/// Handles the movement of the head
-	/// and the camera. Also clamps the movement of the
-	/// camera
-	/// </summary>
-	/// <param name="event">The <c>InputEventMouseMotion event</c>, derivative from the <c>InputEvent</c> type</param>
-	private void HandleCameraMovement(InputEventMouseMotion @event)
+
+
+    //	---
+    //		PRIVATE FUNCTIONS
+    // 	---
+
+    /// <summary>
+    /// Handles the movement of the head
+    /// and the camera. Also clamps the movement of the
+    /// camera
+    /// </summary>
+    /// <param name="event">The <c>InputEventMouseMotion event</c>, derivative from the <c>InputEvent</c> type</param>
+    private void HandleCameraMovement(InputEventMouseMotion @event)
 	{
 		RotateY(Mathf.DegToRad(-@event.Relative.X * CameraSensitivity));
 		Head.RotateX(Mathf.DegToRad(-@event.Relative.Y * CameraSensitivity));
+
+		if (weaponTilt)
+		{
+			CameraVelocity.X = -@event.Relative.X * CameraSensitivity;
+			CameraVelocity.Y = -@event.Relative.Y * CameraSensitivity;
+		}
 
 		var newRotation = Head.Rotation;
 		newRotation.X = Mathf.Clamp(Head.Rotation.X, Mathf.DegToRad(-89), Mathf.DegToRad(89));

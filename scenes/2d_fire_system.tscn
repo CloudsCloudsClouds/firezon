@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6va8487rn2ha"]
+
+[ext_resource type="Script" path="res://scripts/2d_fire_system.gd" id="1_tw7sb"]
+
+[node name="2DFireSystem" type="Node3D"]
+script = ExtResource("1_tw7sb")

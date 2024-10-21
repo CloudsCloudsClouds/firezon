@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcufhd4wb10wo"]
+
+[ext_resource type="Shader" uid="uid://cq7m0ma1snyxv" path="res://scenes/vfx/fire_particle.tres" id="1_2lcfw"]
+
+[sub_resource type="Curve" id="Curve_opmco"]
+_data = [Vector2(0.518519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m2i7a"]
+curve = SubResource("Curve_opmco")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5sf22"]
+angle_min = -720.0
+angle_max = 720.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0.7, 0)
+scale_curve = SubResource("CurveTexture_m2i7a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqwqb"]
+render_priority = 0
+shader = ExtResource("1_2lcfw")
+shader_parameter/NoiseWeigh = 0.6
+
+[sub_resource type="QuadMesh" id="QuadMesh_jyx45"]
+material = SubResource("ShaderMaterial_sqwqb")
+
+[node name="FireParticle" type="GPUParticles3D"]
+amount = 16
+lifetime = 2.0
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_5sf22")
+draw_pass_1 = SubResource("QuadMesh_jyx45")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]

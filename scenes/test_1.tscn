@@ -1,9 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://drlp2vpjldtyo"]
+[gd_scene load_steps=30 format=3 uid="uid://drlp2vpjldtyo"]
 
 [ext_resource type="PackedScene" uid="uid://cuam8eaknil73" path="res://scenes/player.tscn" id="1_4hlwe"]
 [ext_resource type="Material" uid="uid://d3haanma0cvl8" path="res://assets/StyleGround/StyleGroundMaterial.tres" id="1_oxgfr"]
 [ext_resource type="Script" path="res://scripts/smoother.gd" id="3_2j8ty"]
 [ext_resource type="Material" uid="uid://udixsb33ks3k" path="res://assets/FlatCutStone/FlatCutStone.tres" id="4_5ql0k"]
+[ext_resource type="PackedScene" uid="uid://crix5jg626slt" path="res://scenes/chiken.tscn" id="5_g5tlv"]
+[ext_resource type="PackedScene" uid="uid://6fx3fiv30bwm" path="res://scenes/cat.tscn" id="6_qi0k4"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="7_lr807"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="8_hm1yc"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="9_45t8j"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="10_1mja2"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="11_ayr10"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="12_jocbi"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="13_4un3s"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="14_2rxyd"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="15_4oy8l"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="16_17auf"]
+[ext_resource type="PackedScene" uid="uid://cwjipeqrx3fhj" path="res://scenes/placeholder_fire_object.tscn" id="17_2wlru"]
 
 [sub_resource type="GDScript" id="GDScript_2lj8d"]
 script/source = "extends Node3D
@@ -19,12 +32,12 @@ func _physics_process(delta: float) -> void:
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lbxd2"]
 
-[sub_resource type="Sky" id="Sky_ndtj2"]
+[sub_resource type="Sky" id="Sky_0rnec"]
 sky_material = SubResource("ProceduralSkyMaterial_lbxd2")
 
 [sub_resource type="Environment" id="Environment_s3nwx"]
 background_mode = 2
-sky = SubResource("Sky_ndtj2")
+sky = SubResource("Sky_0rnec")
 ambient_light_source = 3
 ambient_light_color = Color(0.329412, 0.286275, 0.627451, 1)
 tonemap_mode = 1
@@ -34,6 +47,64 @@ adjustment_contrast = 0.92
 adjustment_saturation = 1.17
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oej23"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l3j3b"]
+
+[sub_resource type="Resource" id="Resource_8iklk"]
+script = ExtResource("10_1mja2")
+amount = 200
+enabled = true
+override_global_seed = false
+custom_seed = 50
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_8emkc"]
+script = ExtResource("11_ayr10")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(0, 90, 0)
+scale = Vector3(0, 0, 0)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_npioh"]
+script = ExtResource("12_jocbi")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_pxjb3"]
+script = ExtResource("13_4un3s")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 45.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_h2861"]
+script = ExtResource("8_hm1yc")
+stack = Array[ExtResource("9_45t8j")]([SubResource("Resource_8iklk"), SubResource("Resource_8emkc"), SubResource("Resource_npioh"), SubResource("Resource_pxjb3")])
+
+[sub_resource type="Resource" id="Resource_tx8w6"]
+script = ExtResource("16_17auf")
+size = Vector3(6.74307, 1, 13.1106)
 
 [node name="Test1" type="Node3D"]
 script = SubResource("GDScript_2lj8d")
@@ -85,9 +156,6 @@ size = Vector3(96.0807, 5, 1)
 transform = Transform3D(0.337506, -0.638355, 0.691803, 0, 0.734926, 0.678147, -0.941323, -0.228879, 0.248042, 0, 6.81056, 0)
 shadow_enabled = true
 
-[node name="Smoother" type="Node" parent="."]
-script = ExtResource("3_2j8ty")
-
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51959, 1.8293, 2.03473)
 material_override = ExtResource("4_5ql0k")
@@ -106,3 +174,52 @@ material = ExtResource("4_5ql0k")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CSGBox3D7"]
 size = Vector3(8, 1, 5)
+
+[node name="chiken" parent="." instance=ExtResource("5_g5tlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.42007, 0.5, -3.88155)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0254, 2.50798, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_l3j3b")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D"]
+
+[node name="Smoother" type="Node" parent="."]
+script = ExtResource("3_2j8ty")
+smooth_parent = false
+includes = Array[NodePath]([NodePath("../Player")])
+
+[node name="Cat" parent="." instance=ExtResource("6_qi0k4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24838, 0.5, -6.01326)
+
+[node name="Cat2" parent="." instance=ExtResource("6_qi0k4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2097, 0.5, -3.27082)
+
+[node name="Particles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.66074, 4.76837e-07, -10.5075)
+
+[node name="ProtonScatter" type="Node3D" parent="Particles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31173, 0, 0)
+script = ExtResource("7_lr807")
+global_seed = 1
+render_mode = 1
+keep_static_colliders = true
+modifier_stack = SubResource("Resource_h2861")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="ScatterItem" type="Node3D" parent="Particles/ProtonScatter"]
+script = ExtResource("14_2rxyd")
+override_cast_shadow = 0
+path = "res://scenes/placeholder_fire_object.tscn"
+
+[node name="ScatterShape" type="Node3D" parent="Particles/ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("15_4oy8l")
+shape = SubResource("Resource_tx8w6")
+
+[node name="PLACEHOLDERFireObject" parent="." instance=ExtResource("17_2wlru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2707, 0.5, -14.2391)
+is_on_fire = true

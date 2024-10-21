@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://bfdxw6ynhooa"]
+
+[ext_resource type="Texture2D" uid="uid://7uhhrl7ui0gm" path="res://assets/lowres_explosion.png" id="1_mb0gm"]
+[ext_resource type="AudioStream" uid="uid://bntagheuawg6q" path="res://assets/yt1s.com - Roblox Explosion Sound Effect.mp3" id="2_437wd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcu75"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(0, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duk7n"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(498, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r1ay"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(996, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u60u"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(1494, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p2at"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(1992, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uub0c"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(2490, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cljd"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(2988, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq43r"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(3486, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy2ot"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(3984, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x08xm"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(4482, 0, 498, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuusp"]
+atlas = ExtResource("1_mb0gm")
+region = Rect2(4980, 0, 498, 498)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uogef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcu75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duk7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r1ay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u60u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p2at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uub0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cljd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq43r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy2ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x08xm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuusp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_2tshg"]
+script/source = "extends AnimatedSprite3D
+
+@onready var Explosion_sound := load(\"res://assets/yt1s.com - Roblox Explosion Sound Effect.mp3\")
+
+func _ready() -> void:
+	play(\"default\")
+
+func _on_audio_stream_player_3d_finished() -> void:
+	queue_free()
+"
+
+[node name="low_res_explosion" type="AnimatedSprite3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+billboard = 1
+transparent = false
+no_depth_test = true
+sprite_frames = SubResource("SpriteFrames_uogef")
+autoplay = "default"
+frame = 10
+frame_progress = 1.0
+script = SubResource("GDScript_2tshg")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_437wd")
+autoplay = true
+
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]
