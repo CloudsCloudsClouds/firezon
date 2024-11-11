@@ -115,7 +115,7 @@ func shotgun(delta) -> void:
 	$ShotgunSpray.restart()
 	
 	var direction: Vector3 = global_transform.basis.z
-	direction *= 20
+	direction *= 30
 	if not father.is_on_floor():
 		if raycast.is_colliding():
 			var distance := raycast.get_collision_point().distance_to(father.position)

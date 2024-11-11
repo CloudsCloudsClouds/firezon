@@ -1,85 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuam8eaknil73"]
+[gd_scene load_steps=6 format=3 uid="uid://dc7ka0iu317ww"]
 
-[ext_resource type="Script" path="res://scripts/Player.cs" id="1_4uedl"]
-[ext_resource type="PackedScene" uid="uid://djxdpao7n76y" path="res://scenes/placeholder_hose.tscn" id="2_1gdyn"]
-[ext_resource type="Script" path="res://scripts/weapon.gd" id="2_mfc38"]
-[ext_resource type="PackedScene" uid="uid://dy0hpcqnlboxd" path="res://scenes/vfx/water_spray.tscn" id="3_5bad6"]
+[ext_resource type="Script" path="res://scripts/classes/WorldEntity.cs" id="1_ht475"]
+[ext_resource type="Script" path="res://scripts/components/ComponentPlayerController.cs" id="2_ncgtk"]
+[ext_resource type="Script" path="res://scripts/components/ComponentMovementPlayer.cs" id="3_n7poy"]
+[ext_resource type="Script" path="res://scripts/components/ComponentFPSCamera.cs" id="4_g4dja"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_al71x"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iih7o"]
 
-[sub_resource type="GDScript" id="GDScript_plxjb"]
-script/source = "extends Node3D
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ht475")
 
-@onready var camera_3d: Camera3D = $Camera3D
-@export var cam_rotation_ammount: float = 1
+[node name="ComponentPlayerController" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
+script = ExtResource("2_ncgtk")
+Camera = NodePath("../ComponentFPSCamera/Camera3D")
 
-func cam_tilt(input_x, delta) -> void:
-	camera_3d.rotation.z = lerp(camera_3d.rotation.z, -input_x * cam_rotation_ammount, 10 * delta)
-"
+[node name="ComponentMovementPlayer" type="Node3D" parent="."]
+script = ExtResource("3_n7poy")
 
-[sub_resource type="Curve" id="Curve_itmc0"]
-_data = [Vector2(0, 0.362637), 0.0, 0.0, 0, 0, Vector2(0.833333, 1), 0.0541598, 0.0541598, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+[node name="ComponentFPSCamera" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743566, 0)
+script = ExtResource("4_g4dja")
 
-[sub_resource type="CurveTexture" id="CurveTexture_7yypu"]
-curve = SubResource("Curve_itmc0")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t8xtk"]
-velocity_pivot = Vector3(0, 0, -1)
-direction = Vector3(0, 0, -1)
-spread = 5.0
-initial_velocity_min = 37.24
-initial_velocity_max = 42.24
-scale_curve = SubResource("CurveTexture_7yypu")
-color = Color(0.286275, 1, 1, 1)
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
-collision_use_scale = true
-
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Camera", "Weapon")]
-floor_constant_speed = true
-script = ExtResource("1_4uedl")
-Head = NodePath("Head")
-Camera = NodePath("Head/Camera3D")
-Weapon = NodePath("Head/Weapon")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_al71x")
-
-[node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77925, 0)
-script = SubResource("GDScript_plxjb")
-cam_rotation_ammount = 0.076
-
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="ComponentFPSCamera"]
 current = true
 
-[node name="GrabHolder" type="RayCast3D" parent="Head/Camera3D"]
-rotation_edit_mode = 2
-target_position = Vector3(0, 0, -2.5)
-
-[node name="Position" type="Node3D" parent="Head/Camera3D/GrabHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.73181)
-
-[node name="Weapon" type="Node3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.705, -0.32925, -1.573)
-script = ExtResource("2_mfc38")
-weapon_rotation_ammount = 0.15
-
-[node name="ShotgunSpray" parent="Head/Weapon" instance=ExtResource("3_5bad6")]
-amount = 64
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_t8xtk")
-
-[node name="WaterSpray" parent="Head/Weapon" instance=ExtResource("3_5bad6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.145)
-
-[node name="PlaceholderHose" parent="Head/Weapon" instance=ExtResource("2_1gdyn")]
-
-[node name="DistanceToGround" type="RayCast3D" parent="."]
-target_position = Vector3(0, -3, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_iih7o")

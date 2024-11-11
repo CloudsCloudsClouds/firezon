@@ -40,15 +40,15 @@ public partial class Player : CharacterBody3D
 	//		MOVEMENT AND SPEED VARIABLES
 	//	---
 	[Export]
-	private float MAX_GROUND_SPEED = 7;
+	private float MAX_GROUND_SPEED = 15;
 	[Export]
 	private float MAX_AIR_SPEED = 2;
 	[Export]
-	private float JUMP_TIME = 0.6f;
+	private float JUMP_TIME = 0.3f;
 	[Export]
-	private float JUMP_HEIGHT = 1;
+	private float JUMP_HEIGHT = 1.5f;
 	[Export]
-	private float FRICTION = 0.3f;
+	private float FRICTION = 10f;
 
 	private float MAX_ACCELERATION = 10;
 	private float JumpForce;
@@ -93,6 +93,7 @@ public partial class Player : CharacterBody3D
 	{
 		Direction = ProcessDirection();
 		ProcessMovement(delta);
+		GD.Print(delta, " | PLAYER");
 	}
 
     public override void _Process(double delta)
