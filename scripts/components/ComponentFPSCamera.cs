@@ -25,15 +25,17 @@ public partial class ComponentFPSCamera : IComponent
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion && Input.GetMouseMode() == Input.MouseModeEnum.Captured)
-            HandleCameraMovement((InputEventMouseMotion)@event);
+        if(!Engine.IsEditorHint())
+        {
+            if (@event is InputEventMouseMotion && Input.GetMouseMode() == Input.MouseModeEnum.Captured)
+                HandleCameraMovement((InputEventMouseMotion)@event);
+        }
     }
 
     public override void Init()
     {
         MyCamera = GetChildren().OfType<Camera3D>().First();
         SetPhysicsProcess(false);
-        SetProcessMode(ProcessModeEnum.Disabled);
         Entity.EventBus.Subscribe<EventDirection>(event_DirectionInput);
     }
 
@@ -68,6 +70,7 @@ public partial class ComponentFPSCamera : IComponent
 
 		var newRotation = MyCamera.Rotation;
 		newRotation.X = Mathf.Clamp(MyCamera.Rotation.X, Mathf.DegToRad(-89), Mathf.DegToRad(89));
+        newRotation.Y = 0;
 		MyCamera.Rotation = newRotation;
 	}
 
@@ -77,7 +80,9 @@ public partial class ComponentFPSCamera : IComponent
 		{
             var new_rotation = MyCamera.Rotation;
             x_input = @event.TrueDirection.X;
-            new_rotation.Z = Mathf.Lerp(new_rotation.Z, -x_input * HeadTiltAmmount, 10f * (float)delta);
+            var multiplier = (float)Mathf.Clamp(Mathf.Remap(Math.Abs(MyCamera.RotationDegrees.X), 0, 85, 1.5, 0), 0, 1.5f);
+            
+            new_rotation.Z = Mathf.Lerp(new_rotation.Z, -x_input * HeadTiltAmmount * multiplier, 10f * (float)delta);
             MyCamera.Rotation = new_rotation;
 		}
     }

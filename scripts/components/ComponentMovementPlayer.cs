@@ -99,6 +99,7 @@ public partial class ComponentMovementPlayer : IComponent
             .AddTransition(OBJECT_STATES.MOVING, OBJECT_STATES.JUMPING, cond_StartsJumping)
             .AddTransition(OBJECT_STATES.JUMPING, OBJECT_STATES.FALLING, cond_StartsFalling)
             .AddTransition(OBJECT_STATES.FALLING, OBJECT_STATES.JUMPING, cond_StartsJumping)
+            .AddTransition(OBJECT_STATES.JUMPING, OBJECT_STATES.MOVING, cond_HasLanded)
             .Build(OBJECT_STATES.IDLE);
         
         Entity.EventBus.Subscribe<EventDirection>(event_DirectionInput);

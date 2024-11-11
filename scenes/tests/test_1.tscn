@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://drlp2vpjldtyo"]
 
+[ext_resource type="Script" path="res://scripts/LevelBase.cs" id="1_g67rv"]
 [ext_resource type="Material" uid="uid://d3haanma0cvl8" path="res://assets/textures/StyleGround/StyleGroundMaterial.tres" id="1_tuiky"]
-[ext_resource type="PackedScene" uid="uid://cuam8eaknil73" path="res://scenes/tests/playerDeprecated.tscn" id="2_ehpw2"]
 [ext_resource type="Material" uid="uid://udixsb33ks3k" path="res://assets/textures/FlatCutStone/FlatCutStone.tres" id="3_e5id1"]
 [ext_resource type="PackedScene" uid="uid://crix5jg626slt" path="res://scenes/chiken.tscn" id="4_netmi"]
 [ext_resource type="Script" path="res://scripts/smoother.gd" id="5_8bmhm"]
@@ -17,19 +17,7 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="15_4anr4"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="16_4taqi"]
 [ext_resource type="PackedScene" uid="uid://cwjipeqrx3fhj" path="res://scenes/placeholder_fire_object.tscn" id="17_5l03f"]
-
-[sub_resource type="GDScript" id="GDScript_2lj8d"]
-script/source = "extends Node3D
-
-
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed(\"ui_fullscreen\"):
-		if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		else:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	
-"
+[ext_resource type="PackedScene" uid="uid://dc7ka0iu317ww" path="res://scenes/player.tscn" id="17_6uxpl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lbxd2"]
 
@@ -51,7 +39,7 @@ adjustment_saturation = 1.17
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_l3j3b"]
 
-[sub_resource type="Resource" id="Resource_dolwj"]
+[sub_resource type="Resource" id="Resource_dcrea"]
 script = ExtResource("10_mcxd8")
 amount = 200
 enabled = true
@@ -60,7 +48,7 @@ custom_seed = 50
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_rvvns"]
+[sub_resource type="Resource" id="Resource_i1kyn"]
 script = ExtResource("11_7a5w1")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(0, 90, 0)
@@ -71,7 +59,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_38ebs"]
+[sub_resource type="Resource" id="Resource_wqgyc"]
 script = ExtResource("12_bfs5v")
 iterations = 3
 offset_step = 0.2
@@ -83,7 +71,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_2qv2t"]
+[sub_resource type="Resource" id="Resource_ldlj5"]
 script = ExtResource("13_53pgk")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 5.0
@@ -99,24 +87,21 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_ibwk2"]
+[sub_resource type="Resource" id="Resource_csfty"]
 script = ExtResource("8_vq7oy")
-stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_dolwj"), SubResource("Resource_rvvns"), SubResource("Resource_38ebs"), SubResource("Resource_2qv2t")])
+stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_dcrea"), SubResource("Resource_i1kyn"), SubResource("Resource_wqgyc"), SubResource("Resource_ldlj5")])
 
 [sub_resource type="Resource" id="Resource_tx8w6"]
 script = ExtResource("16_4taqi")
 size = Vector3(6.74307, 1, 13.1106)
 
 [node name="Test1" type="Node3D"]
-script = SubResource("GDScript_2lj8d")
+script = ExtResource("1_g67rv")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 use_collision = true
 size = Vector3(100, 1, 100)
 material = ExtResource("1_tuiky")
-
-[node name="Player" parent="." instance=ExtResource("2_ehpw2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.21197, 2.89109, 2.38665)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_s3nwx")
@@ -183,11 +168,6 @@ shape = SubResource("SphereShape3D_l3j3b")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D"]
 
-[node name="Smoother" type="Node" parent="."]
-script = ExtResource("5_8bmhm")
-smooth_parent = false
-includes = Array[NodePath]([NodePath("../Player")])
-
 [node name="Cat" parent="." instance=ExtResource("6_61cpr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24838, 0.5, -6.01326)
 
@@ -203,7 +183,7 @@ script = ExtResource("7_eh1su")
 global_seed = 1
 render_mode = 1
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_ibwk2")
+modifier_stack = SubResource("Resource_csfty")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -219,3 +199,11 @@ shape = SubResource("Resource_tx8w6")
 
 [node name="PLACEHOLDERFireObject" parent="." instance=ExtResource("17_5l03f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2707, 0.5, -14.2391)
+
+[node name="Player" parent="." instance=ExtResource("17_6uxpl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.4829, 0)
+
+[node name="Smoother" type="Node" parent="."]
+script = ExtResource("5_8bmhm")
+smooth_parent = false
+includes = Array[NodePath]([NodePath("../Player")])

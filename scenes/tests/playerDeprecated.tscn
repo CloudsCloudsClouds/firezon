@@ -51,7 +51,7 @@ shape = SubResource("CapsuleShape3D_al71x")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77925, 0)
 script = SubResource("GDScript_plxjb")
-cam_rotation_ammount = 0.076
+cam_rotation_ammount = 0.075
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 current = true

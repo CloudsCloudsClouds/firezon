@@ -42,7 +42,7 @@ public partial class ComponentPlayerController : IComponent
             Entity.EventBus.Ping();
         }
 
-        direction = direction.Rotated(Vector3.Up, Camera.Rotation.Y);
+        direction = direction.Rotated(Vector3.Up, Camera.GlobalRotation.Y);
         EventDirection new_message = new EventDirection(direction, new Vector3(dirs.Y, 0, dirs.X), direction.Length());
         Entity.EventBus.Publish(new_message);
     }

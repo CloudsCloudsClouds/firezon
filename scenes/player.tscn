@@ -20,6 +20,7 @@ script = ExtResource("3_n7poy")
 [node name="ComponentFPSCamera" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743566, 0)
 script = ExtResource("4_g4dja")
+CameraSensitivity = 0.1
 HeadTilt = true
 HeadTiltAmmount = 0.05
 
