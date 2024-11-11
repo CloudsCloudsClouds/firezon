@@ -8,6 +8,7 @@ using Godot;
 public partial class ComponentFPSCamera : IComponent
 {
     public override WorldEntity Entity { get; set; }
+    [Export]
     public override TYPE_OF_UPDATE TypeOfUpdate { get; set; }
     double delta;
     Vector2 MouseSpeed;
