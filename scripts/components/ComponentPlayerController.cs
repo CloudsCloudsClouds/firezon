@@ -33,7 +33,7 @@ public partial class ComponentPlayerController : IComponent
 
     void PublishDirection()
     {
-        var dirs = Input.GetVector("ui_up", "ui_down", "ui_left", "ui_right");
+        var dirs = Input.GetVector("ui_forward", "ui_backward", "ui_leftside", "ui_rightside");
         var direction = new Vector3(dirs.Y, 0, dirs.X);
 
         if (Debug)
@@ -42,9 +42,8 @@ public partial class ComponentPlayerController : IComponent
             Entity.EventBus.Ping();
         }
 
-        var cam_dir = Camera.GlobalTransform.Basis.Z;
         direction = direction.Rotated(Vector3.Up, Camera.Rotation.Y);
-        EventDirection new_message = new EventDirection(direction, direction.Length());
+        EventDirection new_message = new EventDirection(direction, new Vector3(dirs.Y, 0, dirs.X), direction.Length());
         Entity.EventBus.Publish(new_message);
     }
 

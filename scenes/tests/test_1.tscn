@@ -1,8 +1,8 @@
 [gd_scene load_steps=30 format=3 uid="uid://drlp2vpjldtyo"]
 
-[ext_resource type="Material" uid="uid://d3haanma0cvl8" path="res://assets/StyleGround/StyleGroundMaterial.tres" id="1_tuiky"]
+[ext_resource type="Material" uid="uid://d3haanma0cvl8" path="res://assets/textures/StyleGround/StyleGroundMaterial.tres" id="1_tuiky"]
 [ext_resource type="PackedScene" uid="uid://cuam8eaknil73" path="res://scenes/tests/playerDeprecated.tscn" id="2_ehpw2"]
-[ext_resource type="Material" uid="uid://udixsb33ks3k" path="res://assets/FlatCutStone/FlatCutStone.tres" id="3_e5id1"]
+[ext_resource type="Material" uid="uid://udixsb33ks3k" path="res://assets/textures/FlatCutStone/FlatCutStone.tres" id="3_e5id1"]
 [ext_resource type="PackedScene" uid="uid://crix5jg626slt" path="res://scenes/chiken.tscn" id="4_netmi"]
 [ext_resource type="Script" path="res://scripts/smoother.gd" id="5_8bmhm"]
 [ext_resource type="PackedScene" uid="uid://6fx3fiv30bwm" path="res://scenes/cat.tscn" id="6_61cpr"]
@@ -51,7 +51,7 @@ adjustment_saturation = 1.17
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_l3j3b"]
 
-[sub_resource type="Resource" id="Resource_fki4n"]
+[sub_resource type="Resource" id="Resource_dolwj"]
 script = ExtResource("10_mcxd8")
 amount = 200
 enabled = true
@@ -60,7 +60,7 @@ custom_seed = 50
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_svclb"]
+[sub_resource type="Resource" id="Resource_rvvns"]
 script = ExtResource("11_7a5w1")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(0, 90, 0)
@@ -71,7 +71,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_ow4fe"]
+[sub_resource type="Resource" id="Resource_38ebs"]
 script = ExtResource("12_bfs5v")
 iterations = 3
 offset_step = 0.2
@@ -83,7 +83,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_6j5nh"]
+[sub_resource type="Resource" id="Resource_2qv2t"]
 script = ExtResource("13_53pgk")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 5.0
@@ -99,9 +99,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_uftsq"]
+[sub_resource type="Resource" id="Resource_ibwk2"]
 script = ExtResource("8_vq7oy")
-stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_fki4n"), SubResource("Resource_svclb"), SubResource("Resource_ow4fe"), SubResource("Resource_6j5nh")])
+stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_dolwj"), SubResource("Resource_rvvns"), SubResource("Resource_38ebs"), SubResource("Resource_2qv2t")])
 
 [sub_resource type="Resource" id="Resource_tx8w6"]
 script = ExtResource("16_4taqi")
@@ -203,7 +203,7 @@ script = ExtResource("7_eh1su")
 global_seed = 1
 render_mode = 1
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_uftsq")
+modifier_stack = SubResource("Resource_ibwk2")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 

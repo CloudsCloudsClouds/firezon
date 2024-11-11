@@ -12,7 +12,7 @@ script = ExtResource("1_ht475")
 
 [node name="ComponentPlayerController" type="Node3D" parent="." node_paths=PackedStringArray("Camera")]
 script = ExtResource("2_ncgtk")
-Camera = NodePath("")
+Camera = NodePath("../ComponentFPSCamera/Camera3D")
 
 [node name="ComponentMovementPlayer" type="Node3D" parent="."]
 script = ExtResource("3_n7poy")
@@ -20,6 +20,8 @@ script = ExtResource("3_n7poy")
 [node name="ComponentFPSCamera" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743566, 0)
 script = ExtResource("4_g4dja")
+HeadTilt = true
+HeadTiltAmmount = 0.05
 
 [node name="Camera3D" type="Camera3D" parent="ComponentFPSCamera"]
 

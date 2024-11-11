@@ -11,5 +11,13 @@ partial class LevelBase : Node3D
             else
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
         }
+
+        if (Input.IsActionJustPressed("ui_cancel"))
+        {
+            if (Input.GetMouseMode() == Input.MouseModeEnum.Captured)
+                Input.SetMouseMode(Input.MouseModeEnum.Visible);
+            else
+                Input.SetMouseMode(Input.MouseModeEnum.Captured);
+        }
     }
 }
