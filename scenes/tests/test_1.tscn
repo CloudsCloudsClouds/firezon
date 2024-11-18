@@ -4,7 +4,6 @@
 [ext_resource type="Material" uid="uid://d3haanma0cvl8" path="res://assets/textures/StyleGround/StyleGroundMaterial.tres" id="1_tuiky"]
 [ext_resource type="Material" uid="uid://udixsb33ks3k" path="res://assets/textures/FlatCutStone/FlatCutStone.tres" id="3_e5id1"]
 [ext_resource type="PackedScene" uid="uid://crix5jg626slt" path="res://scenes/chiken.tscn" id="4_netmi"]
-[ext_resource type="Script" path="res://scripts/smoother.gd" id="5_8bmhm"]
 [ext_resource type="PackedScene" uid="uid://6fx3fiv30bwm" path="res://scenes/cat.tscn" id="6_61cpr"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="7_eh1su"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="8_vq7oy"]
@@ -18,6 +17,7 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="16_4taqi"]
 [ext_resource type="PackedScene" uid="uid://cwjipeqrx3fhj" path="res://scenes/placeholder_fire_object.tscn" id="17_5l03f"]
 [ext_resource type="PackedScene" uid="uid://dc7ka0iu317ww" path="res://scenes/player.tscn" id="17_6uxpl"]
+[ext_resource type="Texture2D" uid="uid://857g8j5uakhi" path="res://icon.svg" id="19_60e1b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lbxd2"]
 
@@ -39,7 +39,7 @@ adjustment_saturation = 1.17
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_l3j3b"]
 
-[sub_resource type="Resource" id="Resource_dcrea"]
+[sub_resource type="Resource" id="Resource_42snq"]
 script = ExtResource("10_mcxd8")
 amount = 200
 enabled = true
@@ -48,7 +48,7 @@ custom_seed = 50
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_i1kyn"]
+[sub_resource type="Resource" id="Resource_5bm2s"]
 script = ExtResource("11_7a5w1")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(0, 90, 0)
@@ -59,7 +59,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_wqgyc"]
+[sub_resource type="Resource" id="Resource_g3uyp"]
 script = ExtResource("12_bfs5v")
 iterations = 3
 offset_step = 0.2
@@ -71,7 +71,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_ldlj5"]
+[sub_resource type="Resource" id="Resource_akif3"]
 script = ExtResource("13_53pgk")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 5.0
@@ -87,9 +87,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_csfty"]
+[sub_resource type="Resource" id="Resource_l0mbu"]
 script = ExtResource("8_vq7oy")
-stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_dcrea"), SubResource("Resource_i1kyn"), SubResource("Resource_wqgyc"), SubResource("Resource_ldlj5")])
+stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_42snq"), SubResource("Resource_5bm2s"), SubResource("Resource_g3uyp"), SubResource("Resource_akif3")])
 
 [sub_resource type="Resource" id="Resource_tx8w6"]
 script = ExtResource("16_4taqi")
@@ -183,7 +183,7 @@ script = ExtResource("7_eh1su")
 global_seed = 1
 render_mode = 1
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_csfty")
+modifier_stack = SubResource("Resource_l0mbu")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -203,7 +203,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2707, 0.5, -14.2391)
 [node name="Player" parent="." instance=ExtResource("17_6uxpl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.4829, 0)
 
-[node name="Smoother" type="Node" parent="."]
-script = ExtResource("5_8bmhm")
-smooth_parent = false
-includes = Array[NodePath]([NodePath("../Player")])
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("19_60e1b")
