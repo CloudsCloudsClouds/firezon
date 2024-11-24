@@ -39,7 +39,7 @@ adjustment_saturation = 1.17
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_l3j3b"]
 
-[sub_resource type="Resource" id="Resource_42snq"]
+[sub_resource type="Resource" id="Resource_7j5qb"]
 script = ExtResource("10_mcxd8")
 amount = 200
 enabled = true
@@ -48,7 +48,7 @@ custom_seed = 50
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_5bm2s"]
+[sub_resource type="Resource" id="Resource_42hip"]
 script = ExtResource("11_7a5w1")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(0, 90, 0)
@@ -59,7 +59,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_g3uyp"]
+[sub_resource type="Resource" id="Resource_q3cua"]
 script = ExtResource("12_bfs5v")
 iterations = 3
 offset_step = 0.2
@@ -71,7 +71,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_akif3"]
+[sub_resource type="Resource" id="Resource_h6utm"]
 script = ExtResource("13_53pgk")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 5.0
@@ -87,9 +87,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_l0mbu"]
+[sub_resource type="Resource" id="Resource_h4h3c"]
 script = ExtResource("8_vq7oy")
-stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_42snq"), SubResource("Resource_5bm2s"), SubResource("Resource_g3uyp"), SubResource("Resource_akif3")])
+stack = Array[ExtResource("9_j4vd2")]([SubResource("Resource_7j5qb"), SubResource("Resource_42hip"), SubResource("Resource_q3cua"), SubResource("Resource_h6utm")])
 
 [sub_resource type="Resource" id="Resource_tx8w6"]
 script = ExtResource("16_4taqi")
@@ -183,7 +183,7 @@ script = ExtResource("7_eh1su")
 global_seed = 1
 render_mode = 1
 keep_static_colliders = true
-modifier_stack = SubResource("Resource_l0mbu")
+modifier_stack = SubResource("Resource_h4h3c")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 

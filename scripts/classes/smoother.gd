@@ -18,7 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-class_name Smoother extends Node
+class_name Smoother 
+extends Node
 
 ## Smoother Node
 ## Version: 1.0.5
