@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GlobalEnums;
+using ProyectoFirezon.scripts.classes;
 
 [GlobalClass]
 public partial class WorldEntity : CharacterBody3D
