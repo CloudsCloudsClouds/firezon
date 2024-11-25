@@ -4,6 +4,6 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Godot Debug DebugDrawDemoSceneCS</ActiveDebugProfile>
+    <ActiveDebugProfile>Godot Debug MultigridTest</ActiveDebugProfile>
   </PropertyGroup>
 </Project>

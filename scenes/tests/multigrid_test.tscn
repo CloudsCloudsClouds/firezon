@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://5e1i7rtqncku"]
+
+[ext_resource type="Script" path="res://scripts/MultigridTest.cs" id="1_b5vug"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_4wls4"]
+
+[node name="MultigridTest" type="Node3D"]
+script = ExtResource("1_b5vug")
+vector3s = PackedVector3Array(2, 3, 1, 4, 1, 1, 2, 2, 1, 2, 2.5, 1, 2, 2.125, 1, 2, 2.75, 1, 2, 2.3, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.866889, 1.86233)
+script = ExtResource("2_4wls4")
