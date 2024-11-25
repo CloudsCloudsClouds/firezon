@@ -2,6 +2,12 @@ using Godot;
 
 partial class LevelBase : Node3D
 {
+    public override void _Ready()
+    {
+        DebugDraw2D.CreateFpsGraph("FPS");
+    }
+
+
     public override void _PhysicsProcess(double delta)
     {
         if (Input.IsActionJustPressed("ui_fullscreen"))
