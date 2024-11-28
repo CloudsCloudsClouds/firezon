@@ -4,6 +4,11 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Godot Debug MultigridTest</ActiveDebugProfile>
+    <ActiveDebugProfile>Godot Debug Test3</ActiveDebugProfile>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="scripts\components\Component1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>
