@@ -8,10 +8,10 @@
 	  "workingDirectory": ".",
 	  "nativeDebugging": true
 	},
-	"Godot Debug Test3": {
+	"Godot Debug Node3D": {
 	  "commandName": "Executable",
 	  "executablePath": "C:/Users/danis/OneDrive/Escritorio/Godots/Godot_v4.3-stable_mono_win64/Godot_v4.3-stable_mono_win64.exe",
-	  "commandLineArgs": "--upwards ./scenes/tests/test_3.tscn --verbose",
+	  "commandLineArgs": "--upwards  --verbose",
 	  "workingDirectory": ".",
 	  "nativeDebugging": true
 	}
