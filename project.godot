@@ -27,8 +27,6 @@ manager/music/bus="Music"
 [autoload]
 
 VfxManager="*res://scripts/vfx_manager.gd"
-SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
-MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
 
 [debug]
 
@@ -47,7 +45,7 @@ project/assembly_name="Proyecto Firezon"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_visualstudio_debugger/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/resonate/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [input]
 
