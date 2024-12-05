@@ -41,4 +41,13 @@ namespace GlobalEnums
         JUST_EXITED,
         NOT_ACTIVE
     }
+
+    public enum CELL_STATE
+    {
+        HEATHING,
+        BURNING,
+        SOAKED,
+        BURNED,
+        HEALTHY,
+    }
 }
