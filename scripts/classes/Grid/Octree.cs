@@ -1,12 +1,14 @@
 using Godot;
 using System;
 using GlobalEnums;
+using System.Collections.Generic;
+using System.Linq;
 public class Octree 
 {
     Vector3 Position { set; get; }
     float Size { set; get; }
     CELL_STATE State { set; get; } = CELL_STATE.HEALTHY;
-    int Resolution { set; get; }
+    int Depth { set; get; }
 
     private Octree[] Children { get; set; }
     public bool HasChildren => Children != null;
@@ -17,7 +19,7 @@ public class Octree
     {
         Position = pos;
         Size = size;
-        Resolution = res;
+        Depth = res;
         
         isLeaf = res == 0 ? true : false;
         Children = null;
@@ -47,7 +49,7 @@ public class Octree
         for (int i = 0; i < 8; i++)
         {
             Vector3 childPosition = Position + OctantOffset[i];
-            int lessRes = Resolution - 1;
+            int lessRes = Depth - 1;
             Children[i] = new Octree(childPosition, halfSize, lessRes);
         }
     }
@@ -74,6 +76,33 @@ public class Octree
                 child.Insert(point);
             }
         }
+    }
+
+    public List<Vector3> GetLeafPositionByState(List<Vector3> OGList, CELL_STATE state)
+    {
+        if (HasChildren)
+        {
+            foreach (var child in Children)
+            {
+                if (child.isLeaf)
+                {
+                    if (child.State == state)
+                        OGList.Append(child.Position);
+                }
+                else
+                {
+                    OGList = child.GetLeafPositionByState(OGList, state);
+                }
+            }
+        }
+
+        return OGList;
+    }
+
+    public float GetLeafSize()
+    {
+        float lsize = (float) (Size / Math.Pow(2, Depth));
+        return lsize;
     }
 
     public bool ContainsPoint(Vector3 point)
@@ -114,7 +143,7 @@ public class Octree
 
     private void DrawNode()
     {
-        var col = GetColorByDepth(Resolution);
+        var col = GetColorByDepth(Depth);
         var size = new Vector3(Size, Size, Size);
         DebugDraw3D.DrawBox(Position, Quaternion.Identity, size, col, true);
     }
