@@ -13,6 +13,7 @@ namespace Octree
     using System.Numerics;
     
     
+    
 
     /// <summary>
     /// A Dynamic, Loose Octree for storing any objects that can be described with AABB bounds

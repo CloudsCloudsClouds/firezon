@@ -11,6 +11,7 @@ namespace Octree
     using System;
     using System.Collections.Generic;
     using System.Numerics;
+    
 
     public partial class BoundsOctree<T>
     {

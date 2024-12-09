@@ -10,6 +10,7 @@ namespace Octree
     using System;
     using System.Numerics;
     using System.Runtime.Serialization;
+    
 
     /// <summary>
     /// Represents an axis aligned bounding box (AABB).
