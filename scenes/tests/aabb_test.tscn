@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://duur07idni025"]
+
+[ext_resource type="Script" path="res://scripts/camera.gd" id="1_22ws7"]
+
+[sub_resource type="GDScript" id="GDScript_55ucl"]
+script/source = "@tool
+extends Node3D
+
+
+var col: AABB = AABB(position, Vector3(1, 1, 1))
+var flag: bool = false
+
+@onready var node_2: Node3D = $\"../Node2\"
+@onready var node_3: Node3D = $\"../Node3\"
+
+
+func _physics_process(delta: float) -> void:
+	DebugDraw3D.draw_aabb(col, Color.RED)
+	col.position = position - (col.size / 2)
+	if not flag:
+		if col.intersects(node_2.col):
+			print_debug(\"Node 1 collides with node 2\")
+		if col.intersects(node_3.col):
+			print_debug(\"Node 1 collides with node 3\")
+			
+		if col.intersects(node_3.col) and col.intersects(node_2.col):
+			print_debug(\"Node 1 crash\")
+			flag = true
+"
+
+[sub_resource type="GDScript" id="GDScript_vapk6"]
+script/source = "@tool
+extends Node3D
+
+
+var col: AABB = AABB(position, Vector3(1, 1, 1))
+var flag: bool = false
+
+@onready var node_1: Node3D = $\"../Node1\"
+@onready var node_3: Node3D = $\"../Node3\"
+
+
+func _physics_process(delta: float) -> void:
+	DebugDraw3D.draw_aabb(col, Color.BLUE)
+	col.position = position - (col.size / 2)
+	if not flag:
+		if col.intersects(node_1.col):
+			print_debug(\"Node 2 collides with node 1\")
+		if col.intersects(node_3.col):
+			print_debug(\"Node 2 collides with node 3\")
+		
+		if col.intersects(node_1.col) and col.intersects(node_3.col):
+			print_debug(\"Node 2 crash\")
+			flag = true
+"
+
+[sub_resource type="GDScript" id="GDScript_xnhu4"]
+script/source = "@tool
+extends Node3D
+
+
+var col: AABB = AABB(position, Vector3(1, 1, 1))
+var flag: bool = false
+
+@onready var node_2: Node3D = $\"../Node2\"
+@onready var node_1: Node3D = $\"../Node1\"
+
+
+func _physics_process(delta: float) -> void:
+	DebugDraw3D.draw_aabb(col, Color.GREEN)
+	col.position = position - (col.size / 2)
+	if not flag:
+		if col.intersects(node_2.col):
+			print_debug(\"Node 3 collides with node 2\")
+		if col.intersects(node_1.col):
+			print_debug(\"Node 3 collides with node 1\")
+		
+		if col.intersects(node_1.col) and col.intersects(node_2.col):
+			print_debug(\"Node 3 crash\")
+			flag = true
+"
+
+[node name="AABBTest" type="Node3D"]
+
+[node name="Node1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.198118, 0, 0)
+script = SubResource("GDScript_55ucl")
+
+[node name="Node2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50403, 0, 0)
+script = SubResource("GDScript_vapk6")
+
+[node name="Node3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57529, 0, 0)
+script = SubResource("GDScript_xnhu4")
+
+[node name="FreeLookCamera" type="Camera3D" parent="."]
+script = ExtResource("1_22ws7")

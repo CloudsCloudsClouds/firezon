@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgs6gf7wcbxai"]
+
+[ext_resource type="Script" path="res://scripts/objects/FireObject.cs" id="1_1xo27"]
+[ext_resource type="ArrayMesh" uid="uid://bwby23ekxlvg1" path="res://assets/models/kenney_nature_kit/OBJ format/grass_leafs.obj" id="2_mnxq1"]
+[ext_resource type="PackedScene" uid="uid://4ik0vybp6ren" path="res://scenes/vfx/fires.tscn" id="2_vbf65"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1cjq4"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="TESTFireObject1" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+script = ExtResource("1_1xo27")
+BurnedScene = ExtResource("2_vbf65")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125619, 0)
+shape = SubResource("BoxShape3D_1cjq4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_mnxq1")
