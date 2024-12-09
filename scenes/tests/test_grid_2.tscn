@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0tbtwuog62f6"]
+
+[ext_resource type="Script" path="res://scripts/LevelBase.cs" id="1_48xov"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="1_qo8yc"]
+[ext_resource type="Script" path="res://scripts/objects/FireOctreeTest.cs" id="3_3tuls"]
+
+[node name="TestGrid2" type="Node3D"]
+script = ExtResource("1_48xov")
+
+[node name="FreeLookCamera" type="Camera3D" parent="."]
+script = ExtResource("1_qo8yc")
+
+[node name="FireOctreeTest" type="Node3D" parent="."]
+script = ExtResource("3_3tuls")
+FireStarts = PackedVector3Array(3, 2, 2, 2, 1, 4)

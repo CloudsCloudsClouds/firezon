@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cuam8eaknil73"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_4uedl"]
-[ext_resource type="PackedScene" uid="uid://djxdpao7n76y" path="res://scenes/placeholder_hose.tscn" id="2_1gdyn"]
+[ext_resource type="PackedScene" uid="uid://djxdpao7n76y" path="res://scenes/placeholder/placeholder_hose.tscn" id="2_1gdyn"]
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="2_mfc38"]
 [ext_resource type="PackedScene" uid="uid://dy0hpcqnlboxd" path="res://scenes/vfx/water_spray.tscn" id="3_5bad6"]
 

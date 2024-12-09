@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://6meqpfcejn27"]
+
+[node name="GridMapTest" type="GridMap"]
+cell_size = Vector3(1, 1, 1)

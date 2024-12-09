@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://6fx3fiv30bwm"]
+
+[ext_resource type="Script" path="res://scripts/grabable.gd" id="1_6yw8y"]
+[ext_resource type="PackedScene" uid="uid://ifh154tv8pf" path="res://assets/cat/cat.glb" id="2_6dmqv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7gii3"]
+radius = 0.0812359
+height = 0.291103
+
+[node name="Cat" type="RigidBody3D"]
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_6yw8y")
+explode_on_collision = true
+
+[node name="cat" parent="." instance=ExtResource("2_6dmqv")]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0.146628, 0)
+shape = SubResource("CapsuleShape3D_7gii3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

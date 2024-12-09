@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://crix5jg626slt"]
+
+[ext_resource type="Script" path="res://scripts/grabable.gd" id="1_rnbg7"]
+[ext_resource type="PackedScene" uid="uid://6rhrj5lpnwd2" path="res://assets/chiken/chichen.glb" id="2_ucdlf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c8phj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bxg58"]
+radius = 0.3
+height = 1.04787
+
+[node name="chiken" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_c8phj")
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_rnbg7")
+explode_on_collision = true
+
+[node name="chichen" parent="." instance=ExtResource("2_ucdlf")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52509, 0)
+shape = SubResource("CapsuleShape3D_bxg58")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

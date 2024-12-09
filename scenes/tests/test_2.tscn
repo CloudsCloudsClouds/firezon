@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://20na8wdf2qf1"]
 
-[ext_resource type="PackedScene" uid="uid://6meqpfcejn27" path="res://scenes/grid_map_test.tscn" id="1_kxh3n"]
-[ext_resource type="MeshLibrary" uid="uid://cqrdqkya2btkn" path="res://assets/rock_cliffs_mesh_library.tres" id="2_4kgot"]
-[ext_resource type="MeshLibrary" uid="uid://dwtkk5yf0ac00" path="res://assets/wood_bridge_mesh_library.tres" id="3_mivsd"]
+[ext_resource type="PackedScene" uid="uid://6meqpfcejn27" path="res://scenes/placeholder/grid_map_test.tscn" id="1_kxh3n"]
+[ext_resource type="MeshLibrary" uid="uid://cqrdqkya2btkn" path="res://assets/mesh_libraries/rock_cliffs_mesh_library.tres" id="2_4kgot"]
+[ext_resource type="MeshLibrary" uid="uid://dwtkk5yf0ac00" path="res://assets/mesh_libraries/wood_bridge_mesh_library.tres" id="3_mivsd"]
 [ext_resource type="PackedScene" uid="uid://cuam8eaknil73" path="res://scenes/tests/playerDeprecated.tscn" id="4_c258s"]
 [ext_resource type="Script" path="res://scripts/smoother.gd" id="5_8as4j"]
 
