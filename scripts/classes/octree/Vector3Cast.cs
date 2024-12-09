@@ -10,5 +10,14 @@ namespace Octree
                 NumericsVector3.Y
             );
         }
+
+        public static System.Numerics.Vector3 Vector3Convert(Godot.Vector3 GodotVector3)
+        {
+            return new System.Numerics.Vector3(
+                GodotVector3.X,
+                GodotVector3.Y,
+                GodotVector3.Z
+            );
+        }
     }
 }
