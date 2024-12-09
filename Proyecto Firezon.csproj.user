@@ -6,9 +6,5 @@
   <PropertyGroup>
     <ActiveDebugProfile>Godot Debug Test3</ActiveDebugProfile>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Update="scripts\components\Component1.cs">
-      <SubType>Component</SubType>
-    </Compile>
-  </ItemGroup>
+  <ItemGroup />
 </Project>
