@@ -26,9 +26,9 @@ shader_parameter/NoiseWeigh = 0.6
 material = SubResource("ShaderMaterial_sqwqb")
 
 [node name="FireParticle" type="GPUParticles3D"]
-amount = 16
 lifetime = 2.0
-draw_order = 3
+fixed_fps = 24
+visibility_aabb = AABB(-1, -1, -1, 2, 3.42917, 2)
 process_material = SubResource("ParticleProcessMaterial_5sf22")
 draw_pass_1 = SubResource("QuadMesh_jyx45")
 

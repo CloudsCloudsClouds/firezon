@@ -20,6 +20,9 @@ public partial class FireObject : Area3D
         {
             Ignite();
         }
+
+        Random random = new Random();
+        stepId = random.Next(0, 30);
     }
 
     public override void _PhysicsProcess(double delta)
